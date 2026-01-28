@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOBULL APP 2.0 - ITET Cassandro Fermi Nervi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header ispirato al sito della scuola */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .school-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .school-logo {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .school-text h1 {
+            font-size: 1.2rem;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .school-text p {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        /* Hero Section con effetto WOW */
+        .hero {
+            position: relative;
+            padding: 80px 20px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card principale con effetto glassmorphism */
+        .download-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #e53e3e, #ed64a6, #667eea, #764ba2);
+            background-size: 300% 100%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Logo app centrato */
+        .app-logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #e53e3e 0%, #ed64a6 100%);
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(229, 62, 62, 0.4);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .app-icon::after {
+            content: '🛡️';
+            font-size: 60px;
+        }
+
+        .shield-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            border: 3px solid #e53e3e;
+            animation: pulse 2s ease-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #e53e3e 0%, #ed64a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #4a5568;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Bottone download con animazione */
+        .download-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 30px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #e53e3e 0%, #ed64a6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(229, 62, 62, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .download-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 45px rgba(229, 62, 62, 0.5);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Features grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature-item {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            border-color: #ed64a6;
+            box-shadow: 0 10px 30px rgba(229, 62, 62, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            color: #718096;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Istruzioni accordion style */
+        .instructions {
+            margin-top: 50px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border-left: 5px solid #e53e3e;
+        }
+
+        .instructions h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 20px;
+            align-items: start;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.15);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #e53e3e 0%, #ed64a6 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
+        }
+
+        .step-content h3 {
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: #718096;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Alert box */
+        .alert {
+            background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%);
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            display: flex;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .alert-content p {
+            color: #7d6608;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .alert-content strong {
+            color: #6d5007;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .school-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .download-card {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .instructions {
+                padding: 25px;
+            }
+
+            .step {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="school-info">
+                <img src="./images.jpg" alt="Logo ITET Cassandro Fermi Nervi" class="school-logo">
+                <div class="school-text">
+                    <h1>Istituto Tecnico Economico Tecnologico</h1>
+                    <p>Cassandro Fermi Nervi - Barletta</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="download-card">
+                <div class="app-logo-container">
+                    <div class="app-icon">
+                        <div class="shield-pulse"></div>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="version-badge">📱 Versione 2.0</span>
+                    </div>
+                </div>
+
+                <h1>NOBULL APP 2.0</h1>
+                <p class="subtitle">App Anti-Bullismo</p>
+
+                <!-- Download Button -->
+                <a href="nobull-v2.0.apk" download class="download-btn">
+                    <span class="btn-text">
+                        <span>📥</span>
+                        <span>Scarica l'App</span>
+                    </span>
+                </a>
+
+                <!-- Features -->
+                <div class="features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Prevenzione Attiva</h3>
+                        <p>Strumento educativo per promuovere il benessere scolastico</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <h3>Monitoraggio</h3>
+                        <p>Questionari strutturati per valutazione rischio</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Privacy Garantita</h3>
+                        <p>Dati trattati nel rispetto del GDPR</p>
+                    </div>
+                </div>
+
+                <!-- Alert -->
+                <div class="alert">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <p><strong>Prima Installazione:</strong></p>
+                        <p>Poiché l'app non proviene dal Google Play Store, il tuo dispositivo mostrerà un avviso di sicurezza. Questo è normale per le app educational distribuite direttamente dalle scuole. Segui le istruzioni qui sotto per installarla in sicurezza.</p>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="instructions">
+                    <h2>
+                        <span>📱</span>
+                        <span>Guida all'Installazione</span>
+                    </h2>
+
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Scarica l'APK</h3>
+                            <p>Clicca sul pulsante rosso "Scarica l'App" qui sopra. Il file verrà salvato nella cartella Download del tuo dispositivo.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Consenti Installazione</h3>
+                            <p>Vai su <strong>Impostazioni → Sicurezza → Installa app sconosciute</strong> e abilita il browser/file manager da cui stai installando.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Apri il File</h3>
+                            <p>Trova il file <strong>nobull-v2.0.apk</strong> nella cartella Download e toccalo per avviare l'installazione.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Conferma Installazione</h3>
+                            <p>Ignora l'avviso di sicurezza (è normale per app educational) e tocca <strong>"Installa comunque"</strong> o <strong>"Installa"</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Avvia l'App</h3>
+                            <p>Una volta completata l'installazione, tocca <strong>"Apri"</strong> per iniziare a utilizzare NOBULL APP 2.0!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>NOBULL APP 2.0</strong> - Progetto Anti-Bullismo</p>
+            <div class="footer-links">
+                <a href="https://cassandroferminervi.edu.it/">Sito della Scuola</a>
+
+            </div>
+            <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.7;">
+                ITET Cassandro Fermi Nervi - Barletta
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Animazione al scroll
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.feature-item, .step');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                if(position.top < window.innerHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Effetto click sul bottone download
+        document.querySelector('.download-btn').addEventListener('click', function(e) {
+            const btn = this;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 200);
+        });
+
+        // Particelle animate
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '5px';
+            particle.style.height = '5px';
+            particle.style.background = 'rgba(255, 255, 255, 0.5)';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.pointerEvents = 'none';
+            
+            document.querySelector('.hero').appendChild(particle);
+            
+            const duration = Math.random() * 3 + 2;
+            particle.animate([
+                { transform: 'translateY(0px)', opacity: 1 },
+                { transform: 'translateY(-800px)', opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                easing: 'ease-out'
+            });
+            
+            setTimeout(() => particle.remove(), duration * 1000);
+        }
+
+        setInterval(createParticle, 500);
+    </script>
+</body>
+</html>
